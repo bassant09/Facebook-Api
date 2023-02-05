@@ -9,7 +9,7 @@ namespace Facebook_Api.Services.Comment_Folder
         //Task<ServicesRespone<> AddComment();
         Task<ServicesRespone<List<GetCommentsDto>>> AddComment(AddCommentDto comment);
         Task<ServicesRespone<string>> DeleteComment(int Id,int PostId);
-        //Task<ServicesRespone<GetCommentsDto>> EditComment(EditCommentDto comment);
+        Task<ServicesRespone<GetCommentsDto>> EditComment(EditCommentDto comment);
 
 
     }

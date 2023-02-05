@@ -1,9 +1,13 @@
 using Facebook_Api.Data;
 using Facebook_Api.Models;
 using Facebook_Api.Services.Authantication_Folder;
+using Facebook_Api.Services.Block_Folder;
 using Facebook_Api.Services.Comment_Folder;
+using Facebook_Api.Services.CommentReaction_Folder;
+using Facebook_Api.Services.Filer_Folder;
 using Facebook_Api.Services.Friends_Controller;
 using Facebook_Api.Services.Post_Folder;
+using Facebook_Api.Services.PostReaction_Folder;
 using Facebook_Api.Services.Repository_Pattern;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +41,11 @@ builder.Services.AddScoped<IAuthanticationRepository, AuthanticationRepository>(
 builder.Services.AddScoped<IPostServices, PostServices>();
 builder.Services.AddScoped<ICommentServices, CommentService>();
 builder.Services.AddScoped<IFriendServices, FriendServices>();
+builder.Services.AddScoped<IBlockServices,BlockServices>();
+builder.Services.AddScoped<ICommentReactionServices,CommentReactionServices>();
+builder.Services.AddScoped<IPostReactionServices,PostReactionServices>();
+builder.Services.AddScoped<IFilterServices,FilterServices>();
+
 builder.Services.AddScoped<IRepositoryPattern<User>, RepositoryPattern<User>>();
 
 

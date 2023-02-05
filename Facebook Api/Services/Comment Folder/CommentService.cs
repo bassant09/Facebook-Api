@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Facebook_Api.Data;
 using Facebook_Api.DTOS.CommentDtos;
+using Facebook_Api.DTOS.CommentReactionDto;
 using Facebook_Api.DTOS.PostDtos;
 using Facebook_Api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -63,17 +64,24 @@ namespace Facebook_Api.Services.Comment_Folder
             return respone;
 
         }
+        public  async Task<ServicesRespone<GetCommentsDto>> EditComment(EditCommentDto comment)
+        {
+            var respone = new ServicesRespone<GetCommentsDto>();
 
-        //public Task<ServicesRespone<GetCommentsDto>> EditComment(EditCommentDto comment)
-        //{
-        //    var respone = new ServicesRespone<GetCommentsDto>();
+            var OldComment = _db.Comments.Include(e=>e.User). FirstOrDefault(e => e.Id == comment.Id && e.User.Id == GetUserId());
+            if (OldComment == null)
+            {
+                respone.Success=false;
+                respone.Message = "Comment Not Found ";
+                return respone;
+            }
+            _mapper.Map(comment,OldComment);
+            _db.Comments.Update(OldComment);
+           await _db.SaveChangesAsync();
+            respone.Data = _mapper.Map<GetCommentsDto>(OldComment);
+            return respone;
 
-        //    var OldComment =_db.Comments.FirstOrDefault(e=>e.Id== comment.Id&&e.User.Id==GetUserId()&&e.Post.Id==comment.Post.Id);
-        //    if (OldComment == null)
-        //    {
-                
-        //    }
-            
-        //}
+
+        }
     }
 }

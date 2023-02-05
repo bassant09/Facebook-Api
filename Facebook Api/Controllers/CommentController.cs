@@ -25,10 +25,16 @@ namespace Facebook_Api.Controllers
             //int userId = int.Parse(User.Claims.FirstOrDefault(e => e.Type == ClaimTypes.NameIdentifier).Value);
             return Ok(await _services.AddComment(comment));
         }
-        [HttpDelete("deleteComment/{Id} {PostId}")]
+        [HttpDelete("deleteComment/{Id}/{PostId}")]
         public async Task<ActionResult<ServicesRespone<string>>>DeleteComment(int Id, int PostId){
             return Ok(await _services.DeleteComment(Id, PostId)); 
             }
+        [HttpPut("EditComment")]
+        public async Task<ActionResult<ServicesRespone<GetCommentsDto>>> EditComment(EditCommentDto comment)
+        {
+            //int userId = int.Parse(User.Claims.FirstOrDefault(e => e.Type == ClaimTypes.NameIdentifier).Value);
+            return Ok(await _services.EditComment(comment));
+        }
 
     }
 }
